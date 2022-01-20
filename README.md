@@ -1,6 +1,6 @@
 # ECSDI 2021/2022
 
-Ejemplos y codigo para la practica de ECSDI cuatrimestre de primavera 2020/2021
+Ejemplos y codigo para la practica de ECSDI cuatrimestre de primavera 2021/2022
 
 * `/AgentUtil` Clases con funciones utiles para la practica
 * `/Examples/AgentExamples` Plantillas para desarrolar agentes + ejemplos
