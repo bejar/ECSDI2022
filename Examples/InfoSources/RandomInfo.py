@@ -12,10 +12,10 @@ RandomInfo
     Asumimos que tenemos ya definida una ontologia y simplemente escogemos una o varias de las clases
     y generamos aleatoriamente los valores para sus atributos.
 
-    Solo tenemos que añadir aserciones al grafo RDFlib y despues grabarlo en OWL (o turtle), el resultado
+    Solo tenemos que aÃ±adir aserciones al grafo RDFlib y despues grabarlo en OWL (o turtle), el resultado
     deberia poder cargarse en Protege, en un grafo RDFlib o en una triplestore (Stardog, Fuseki, ...)
 
-    Se puede añadir tambien aserciones sobre las clases y los atributos si no estan ya en una ontologia
+    Se puede aÃ±adir tambien aserciones sobre las clases y los atributos si no estan ya en una ontologia
       que hayamos elaborado con Protege
 
 :Authors: bejar
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     xsddatatypes = {'s': XSD.string, 'i': XSD.int, 'f': XSD.float}
 
     # Creamos instancias de la clase PrOnt.ElectronicDevice asumiendo que esta clase ya existe en nuestra ontologia
-    # nos hace falta añadirla al fichero de instancias si queremos usarla para hacer consultas sobre sus subclases
+    # nos hace falta aÃ±adirla al fichero de instancias si queremos usarla para hacer consultas sobre sus subclases
     #
     # Asumimos que tenemos los atributos
     #  * PrOntPr.tieneMarca: de producto a marca
@@ -98,7 +98,7 @@ if __name__ == '__main__':
 
     products_graph = Graph()
 
-    # Añadimos los espacios de nombres al grafo
+    # AÃ±adimos los espacios de nombres al grafo
     products_graph.bind('pont', PrOnt)
     products_graph.bind('pontp', PrOntPr)
     products_graph.bind('pontr', PrOntRes)
@@ -106,7 +106,7 @@ if __name__ == '__main__':
     # Clase padre de los productos
     products_graph.add((PrOnt.ElectronicDevice, RDF.type, OWL.Class))
 
-    # Añadimos los atributos al grafo con sus rangos (los dominios los añadimos despues con cada clase)
+    # AÃ±adimos los atributos al grafo con sus rangos (los dominios los aÃ±adimos despues con cada clase)
     for prop in product_properties:
         if product_properties[prop] in ['s', 'i', 'f']:
             products_graph.add((PrOntPr[prop], RDF.type, OWL.DatatypeProperty))
@@ -125,7 +125,7 @@ if __name__ == '__main__':
     for prc in product_classes:
         products_graph.add((PrOnt[prc], RDFS.subClassOf, PrOnt.ElectronicDevice))
 
-        # Añadimos las propiedades con sus dominios (si no estan ya en la definicion de la ontologia original)
+        # AÃ±adimos las propiedades con sus dominios (si no estan ya en la definicion de la ontologia original)
 
         for prop in product_classes[prc]:
             products_graph.add((PrOntPr[prop[0]], RDFS.domain, PrOnt[prc]))
@@ -137,7 +137,7 @@ if __name__ == '__main__':
             # instancia al azar
             rmarca = random_name('Marca_'+ prc)
             dclases['Marca'].append(rmarca)
-            # Añadimos la instancia de marca
+            # AÃ±adimos la instancia de marca
             products_graph.add((PrOntRes[rmarca], RDF.type, PrOnt.Marca))
             # Le asignamos una propiedad nombre a la marca
             products_graph.add((PrOntRes[rmarca], PrOntPr.nombre, Literal(rmarca)))
@@ -164,12 +164,8 @@ if __name__ == '__main__':
                 products_graph.add((PrOntRes[rproduct], PrOntPr[attr[0]], val))
 
 
-    # Resultado en Turtle
-    print(products_graph.serialize(format='turtle'))
-
-
-    # Grabamos el OWL resultante
-    # Lo podemos cargar en Protege para verlo y cargarlo con RDFlib o en una triplestore (Stardog/Fuseki)
-    ofile  = open('product.owl', "w")
-    ofile.write(products_graph.serialize())
+    # Grabamos la ontologia resultante en turtle
+    # Lo podemos cargar en Protege para verlo y cargarlo con RDFlib o en una triplestore (Fuseki)
+    ofile  = open('product.ttl', "wb")
+    ofile.write(products_graph.serialize(format='turtle'))
     ofile.close()
