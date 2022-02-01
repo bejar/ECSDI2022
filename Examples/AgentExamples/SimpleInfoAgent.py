@@ -34,10 +34,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--open', help="Define si el servidor esta abierto al exterior o no", action='store_true',
                     default=False)
 parser.add_argument('--verbose', help="Genera un log de la comunicacion del servidor web", action='store_true',
-                        default=False)
-parser.add_argument('--port', type=int, help="Puerto de comunicacion del agente")
+                    default=False)
+parser.add_argument('--port', type=int,
+                    help="Puerto de comunicacion del agente")
 parser.add_argument('--dhost', help="Host del agente de directorio")
-parser.add_argument('--dport', type=int, help="Puerto de comunicacion del agente de directorio")
+parser.add_argument('--dport', type=int,
+                    help="Puerto de comunicacion del agente de directorio")
 
 # Logging
 logger = config_logger(level=1)
@@ -187,14 +189,16 @@ def comunicacion():
     # Comprobamos que sea un mensaje FIPA ACL
     if msgdic is None:
         # Si no es, respondemos que no hemos entendido el mensaje
-        gr = build_message(Graph(), ACL['not-understood'], sender=InfoAgent.uri, msgcnt=mss_cnt)
+        gr = build_message(
+            Graph(), ACL['not-understood'], sender=InfoAgent.uri, msgcnt=mss_cnt)
     else:
         # Obtenemos la performativa
         perf = msgdic['performative']
 
         if perf != ACL.request:
             # Si no es un request, respondemos que no hemos entendido el mensaje
-            gr = build_message(Graph(), ACL['not-understood'], sender=InfoAgent.uri, msgcnt=mss_cnt)
+            gr = build_message(
+                Graph(), ACL['not-understood'], sender=InfoAgent.uri, msgcnt=mss_cnt)
         else:
             # Extraemos el objeto del contenido que ha de ser una accion de la ontologia de acciones del agente
             # de registro
@@ -246,7 +250,6 @@ def agentbehavior1(cola):
             fin = True
         else:
             print(v)
-
 
 
 if __name__ == '__main__':

@@ -102,17 +102,22 @@ if __name__ == '__main__':
     # Definimos los parametros de la linea de comandos
     parser = argparse.ArgumentParser()
     parser.add_argument('--host', default='localhost', help="Host del agente")
-    parser.add_argument('--port', type=int, help="Puerto de comunicacion del agente")
-    parser.add_argument('--acomm', help='Direccion del agente con el que comunicarse')
-    parser.add_argument('--aport', type=int, help='Puerto del agente con el que comunicarse')
-    parser.add_argument('--messages', nargs='+', default=[], help="mensajes a enviar")
+    parser.add_argument('--port', type=int,
+                        help="Puerto de comunicacion del agente")
+    parser.add_argument(
+        '--acomm', help='Direccion del agente con el que comunicarse')
+    parser.add_argument('--aport', type=int,
+                        help='Puerto del agente con el que comunicarse')
+    parser.add_argument('--messages', nargs='+',
+                        default=[], help="mensajes a enviar")
 
     # parsing de los parametros de la linea de comandos
     args = parser.parse_args()
 
     # Ponemos en marcha el comportamiento si se indica una direccion
     if args.acomm is not None:
-        ab = Process(target=behavior, args=(args.messages, (args.acomm, args.aport)))
+        ab = Process(target=behavior, args=(
+            args.messages, (args.acomm, args.aport)))
         ab.start()
 
     # Ponemos en marcha el servidor

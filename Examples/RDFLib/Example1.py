@@ -36,4 +36,3 @@ t = g.triples((None, FOAF.age, Literal(22)))
 
 for a in t:
     print(a)
-

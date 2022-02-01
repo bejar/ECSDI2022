@@ -63,4 +63,3 @@ if __name__ == "__main__":
     p1 = Process(target=mainloop)
     p1.start()
     app.run()
-

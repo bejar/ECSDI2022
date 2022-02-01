@@ -36,10 +36,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--open', help="Define si el servidor est abierto al exterior o no", action='store_true',
                     default=False)
 parser.add_argument('--verbose', help="Genera un log de la comunicacion del servidor web", action='store_true',
-                        default=False)
-parser.add_argument('--port', type=int, help="Puerto de comunicacion del agente")
+                    default=False)
+parser.add_argument('--port', type=int,
+                    help="Puerto de comunicacion del agente")
 parser.add_argument('--dhost', help="Host del agente de directorio")
-parser.add_argument('--dport', type=int, help="Puerto de comunicacion del agente de directorio")
+parser.add_argument('--dport', type=int,
+                    help="Puerto de comunicacion del agente de directorio")
 
 # Logging
 logger = config_logger(level=1)
@@ -224,6 +226,7 @@ def agentbehavior1():
     # Ahora mandamos un objeto de tipo request mandando una accion de tipo Search
     # que esta en una supuesta ontologia de acciones de agentes
     infoagent_search_message(ragn_addr, ragn_uri)
+
 
 if __name__ == '__main__':
     # Ponemos en marcha los behaviors
