@@ -43,6 +43,7 @@ def build_message(gmess, perf, sender=None, receiver=None,  content=None, msgcnt
         gmess.add((ms, ACL.receiver, receiver))
     if content is not None:
         gmess.add((ms, ACL.content, content))
+        
     return gmess
 
 
@@ -56,7 +57,7 @@ def send_message(gmess, address):
 
     # Procesa la respuesta y la retorna como resultado como grafo
     gr = Graph()
-    gr.parse(data=r.text)
+    gr.parse(data=r.text, format='xml')
 
     return gr
 
